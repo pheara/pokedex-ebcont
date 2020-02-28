@@ -22,5 +22,11 @@
     "parcel": "^1.12.4",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   }
 }
