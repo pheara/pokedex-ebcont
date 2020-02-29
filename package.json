@@ -48,8 +48,8 @@
     "@types/material-ui": "^0.21.7",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": "0.0.0-experimental-d28bd2994",
+    "react-dom": "0.0.0-experimental-d28bd2994"
   },
   "husky": {
     "hooks": {
