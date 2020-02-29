@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function App() {
+const App: React.FC = () => {
   const classes = useStyles();
   // TODO title semantically is not an h6
   // TODO no menu icon in overview; only a back button in details view
@@ -47,5 +47,5 @@ function App() {
       </AppBar>
     </React.Fragment>
   );
-}
+};
 export default App;
