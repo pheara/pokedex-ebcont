@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, Suspense, FunctionComponent, Fragment } from "react";
 // import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import MenuIcon from "@material-ui/icons/Menu";
+import PokemonList from "./PokemonList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,13 +23,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
   const classes = useStyles();
+
+  useEffect(() => console.log("finished rendering " + Math.random()));
   // TODO title semantically is not an h6. use as syntax or define own styled comp.
   // TODO no menu icon in overview; only a back button in details view
   // CssBaseline: a style reset
+
   return (
-    <React.Fragment>
+    <Fragment>
       <CssBaseline />
       <AppBar position="static">
         <Toolbar>
@@ -45,7 +49,10 @@ const App: React.FC = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+      <Suspense fallback={<p>Loading pokemon list...</p>}>
+        <PokemonList></PokemonList>
+      </Suspense>
+    </Fragment>
   );
 };
 export default App;
