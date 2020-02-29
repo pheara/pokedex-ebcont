@@ -8,7 +8,7 @@
     "watch": "parcel index.html",
     "clean": "rimraf ./.cache/ ./dist/",
     "test": "jest --watch",
-    "lint": "eslint --fix src/**",
+    "lint": "eslint --fix --max-warnings 0 src/**",
     "coverage-check": "jest --coverage"
   },
   "repository": {
@@ -33,7 +33,9 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
+    "lint-staged": "^10.0.8",
     "parcel": "^1.12.4",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
@@ -48,5 +50,13 @@
     "@types/react-dom": "^16.9.5",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --cache --fix --max-warnings 0"
   }
 }
