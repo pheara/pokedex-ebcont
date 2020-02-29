@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App: React.FC = () => {
   const classes = useStyles();
-  // TODO title semantically is not an h6
+  // TODO title semantically is not an h6. use as syntax or define own styled comp.
   // TODO no menu icon in overview; only a back button in details view
   // CssBaseline: a style reset
   return (
