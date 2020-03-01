@@ -1,5 +1,5 @@
 export interface PokemonMinimal {
-  id: number;
+  id: number; // TODO drop me?; name is unique. also id != order. and pokedex-entry-nr varies by game.
   name: string; //english
   url: URL; // api-url
   picture: URL;
@@ -11,12 +11,35 @@ export interface PokemonDetailed extends PokemonMinimal {
    * source: <https://bulbapedia.bulbagarden.net/wiki/Ability>
    */
   abilities: Array<Ability>;
-  type: Array<Type>; // technically it's Type | [Type, Type]
+  types: Array<Type>; // technically it's Type | [Type, Type]
   //orderNumber: string // == id
-  stats: string;
-  possibleEvolutions: string;
+  baseStats: BaseStatBlock;
+  inEvolutionTree: EvolutionTree;
+  possibleEvolutions: Array<string>;
   moves: Array<Move>;
+  order: number;
   //   games: string; // would like to have this in minimal somehow, as the minimal info's used in the overview
+}
+
+export interface BaseStatBlock {
+  hp: number;
+  attack: number;
+  defense: number;
+  specialAttack: number;
+  specialDefense: number;
+  speed: number;
+  /*
+   * the following two exist on the list of stats but,
+   * not on pokemon entries leading to the assumption
+   * that there's no base-stats for it.
+   */
+  // accuracy: number;
+  // evasion: number;
+}
+
+export interface EvolutionTree {
+  name: string;
+  evolvesTo: Array<EvolutionTree>; // empty array for leafs
 }
 
 export interface Ability {
