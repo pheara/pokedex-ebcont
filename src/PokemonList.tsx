@@ -4,6 +4,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 import { getFullPokemonsList } from "./PokeApiWrapper";
 import { PokemonMinimal } from "./model/Pokemon";
+
+import { FixedSizeList } from "react-window";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -17,7 +19,12 @@ const PokemonList: FunctionComponent = () => {
   const allPokemon: Array<PokemonMinimal> = resource.read();
 
   return (
-    <List>
+    <FixedSizeList
+      itemCount={allPokemon.length}
+      height={400}
+      width={300}
+      itemSize={46}
+    >
       {allPokemon.map((pokemon: PokemonMinimal) => (
         <ListItem
           button
@@ -35,7 +42,7 @@ const PokemonList: FunctionComponent = () => {
           />
         </ListItem>
       ))}
-    </List>
+    </FixedSizeList>
   );
 };
 

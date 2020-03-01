@@ -55,7 +55,8 @@
     "pokeapi-js-wrapper": "^1.1.2",
     "react": "0.0.0-experimental-d28bd2994",
     "react-dom": "0.0.0-experimental-d28bd2994",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "react-window": "^1.8.5"
   },
   "husky": {
     "hooks": {
