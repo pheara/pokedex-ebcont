@@ -1,4 +1,6 @@
 import React, { useEffect, Suspense, FunctionComponent, Fragment } from "react";
+// import ErrorBoundary from "react-error-boundary";
+import { ErrorBoundary } from "./ErrorBoundary";
 // import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -49,9 +51,11 @@ const App: FunctionComponent = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Suspense fallback={<p>Loading pokemon list...</p>}>
-        <PokemonList></PokemonList>
-      </Suspense>
+      <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
+        <Suspense fallback={<p>Loading pokemon list...</p>}>
+          <PokemonList></PokemonList>
+        </Suspense>
+      </ErrorBoundary>
     </Fragment>
   );
 };

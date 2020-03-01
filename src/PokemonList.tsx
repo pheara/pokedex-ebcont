@@ -15,8 +15,17 @@ const fetchDummyData = (): {
 } => ({
   pokemonList: wrapPromise(delay(1500).then(() => dummyData)),
 });
+const failDummyFetching = (): {
+  pokemonList: SuspenseResource<Array<DummyPokemon>>;
+} => ({
+  pokemonList: wrapPromise(
+    delay(1500).then(() => {
+      throw new Error("Failed fetching as intended.");
+    })
+  ),
+});
 
-const resource = fetchDummyData();
+const resource = Math.random() > 0.5 ? fetchDummyData() : failDummyFetching();
 
 const PokemonList: FunctionComponent = () => {
   const listData: Array<DummyPokemon> = resource.pokemonList.read();
