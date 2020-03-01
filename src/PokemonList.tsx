@@ -19,7 +19,7 @@ const PokemonList: FunctionComponent = () => {
   return (
     <List>
       {allPokemon.map((pokemon: PokemonMinimal) => (
-        <ListItem button divider key={pokemon.id}>
+        <ListItem button divider key={pokemon.id} component="li">
           <ListItemAvatar>
             <img src={pokemon.picture.href} alt={pokemon.name} />
           </ListItemAvatar>
