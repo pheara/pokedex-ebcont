@@ -55,7 +55,7 @@ const App: FunctionComponent = () => {
           </Toolbar>
         </AppBar>
         <Switch>
-          <Route path="/:id">
+          <Route path="/:name">
             <PokemonDetails></PokemonDetails>
           </Route>
           <Route path="/">

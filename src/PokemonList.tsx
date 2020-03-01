@@ -24,7 +24,7 @@ const PokemonList: FunctionComponent = () => {
           divider
           key={pokemon.id}
           component={RouterLink}
-          to={"/" + pokemon.id}
+          to={"/" + pokemon.name}
         >
           <ListItemAvatar>
             <img src={pokemon.picture.href} alt={pokemon.name} />
