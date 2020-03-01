@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { wrapPromise, capitalizeFirstLetter } from "./utils";
+import { Link as RouterLink } from "react-router-dom";
 
 import { getFullPokemonsList } from "./PokeApiWrapper";
 import { PokemonMinimal } from "./model/Pokemon";
@@ -7,7 +8,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
-// import MenuIcon from "@material-ui/icons/Menu";
 
 getFullPokemonsList().then(list => console.log("catch all of these: ", list));
 
@@ -19,7 +19,13 @@ const PokemonList: FunctionComponent = () => {
   return (
     <List>
       {allPokemon.map((pokemon: PokemonMinimal) => (
-        <ListItem button divider key={pokemon.id} component="li">
+        <ListItem
+          button
+          divider
+          key={pokemon.id}
+          component={RouterLink}
+          to={"/" + pokemon.id}
+        >
           <ListItemAvatar>
             <img src={pokemon.picture.href} alt={pokemon.name} />
           </ListItemAvatar>
@@ -34,12 +40,3 @@ const PokemonList: FunctionComponent = () => {
 };
 
 export default PokemonList;
-
-// <ul>
-//   {allPokemon.map((pokemon: PokemonMinimal) => (
-//     <li key={pokemon.id}>
-//       <img src={pokemon.picture.href} alt={pokemon.name} />#{pokemon.id}{" "}
-//       {capitalizeFirstLetter(pokemon.name)}
-//     </li>
-//   ))}
-// </ul>

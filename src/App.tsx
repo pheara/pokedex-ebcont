@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, FunctionComponent, Fragment } from "react";
 // import ErrorBoundary from "react-error-boundary";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorBoundary";
 // import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
@@ -10,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import MenuIcon from "@material-ui/icons/Menu";
 import PokemonList from "./PokemonList";
+import PokemonDetails from "./PokemonDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,9 +38,10 @@ const App: FunctionComponent = () => {
   return (
     <Fragment>
       <CssBaseline />
-      <AppBar position="static">
-        <Toolbar>
-          {/* <IconButton
+      <Router>
+        <AppBar position="static">
+          <Toolbar>
+            {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -46,17 +49,26 @@ const App: FunctionComponent = () => {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            Pokedex
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
-        <Suspense fallback={<p>Loading pokemon list...</p>}>
-          <PokemonList></PokemonList>
-        </Suspense>
-      </ErrorBoundary>
+            <Typography variant="h6" className={classes.title}>
+              Pokedex
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Switch>
+          <Route path="/:id">
+            <PokemonDetails></PokemonDetails>
+          </Route>
+          <Route path="/">
+            <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
+              <Suspense fallback={<p>Loading pokemon list...</p>}>
+                <PokemonList></PokemonList>
+              </Suspense>
+            </ErrorBoundary>
+          </Route>
+        </Switch>
+      </Router>
     </Fragment>
   );
 };
+
 export default App;
