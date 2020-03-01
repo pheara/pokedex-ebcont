@@ -101,7 +101,11 @@ export function parseNamedRessourceUrl(res: {
     url: new URL(res.url),
   };
 }
-export function toPokemonMinimal(id: number, name: string, url?: string) {
+export function toPokemonMinimal(
+  id: number,
+  name: string,
+  url?: string
+): PokemonMinimal {
   if (!url) {
     url = pokemonBaseUrl + id;
   }
