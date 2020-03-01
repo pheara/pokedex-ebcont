@@ -56,7 +56,11 @@ const App: FunctionComponent = () => {
         </AppBar>
         <Switch>
           <Route path="/:name">
-            <PokemonDetails></PokemonDetails>
+            <ErrorBoundary fallback={<p>Failed to load pokemon!</p>}>
+              <Suspense fallback={<p>Loading pokemon ...</p>}>
+                <PokemonDetails></PokemonDetails>
+              </Suspense>
+            </ErrorBoundary>
           </Route>
           <Route path="/">
             <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
