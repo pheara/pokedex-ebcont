@@ -51,7 +51,7 @@ function parsePokemonListEntry(
       id: id,
       name: pokemonDataPoint.name,
       url: new URL(pokemonDataPoint.url),
-      picture: new URL(pictureBaseUrl + id),
+      picture: new URL(pictureBaseUrl + id + ".png"),
     };
     return pokemon;
   }
