@@ -3,6 +3,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "strict": true,
-    "target": "ES6"
+    "target": "ES6",
+    "lib": ["ES2019", "DOM"]
   }
 }
