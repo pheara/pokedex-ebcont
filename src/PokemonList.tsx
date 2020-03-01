@@ -1,8 +1,13 @@
 import React, { FunctionComponent } from "react";
-import { delay, wrapPromise, SuspenseResource } from "./utils";
+import { wrapPromise, capitalizeFirstLetter } from "./utils";
 
 import { getFullPokemonsList } from "./PokeApiWrapper";
 import { PokemonMinimal } from "./model/Pokemon";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+// import MenuIcon from "@material-ui/icons/Menu";
 
 getFullPokemonsList().then(list => console.log("catch all of these: ", list));
 
@@ -12,15 +17,29 @@ const PokemonList: FunctionComponent = () => {
   const allPokemon: Array<PokemonMinimal> = resource.read();
 
   return (
-    <ul>
+    <List>
       {allPokemon.map((pokemon: PokemonMinimal) => (
-        <li key={pokemon.id}>
-          <img src={pokemon.picture.href} alt={pokemon.name} />#{pokemon.id}{" "}
-          {pokemon.name}
-        </li>
+        <ListItem button divider key={pokemon.id}>
+          <ListItemAvatar>
+            <img src={pokemon.picture.href} alt={pokemon.name} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={capitalizeFirstLetter(pokemon.name)}
+            secondary={"#" + pokemon.id}
+          />
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 
 export default PokemonList;
+
+// <ul>
+//   {allPokemon.map((pokemon: PokemonMinimal) => (
+//     <li key={pokemon.id}>
+//       <img src={pokemon.picture.href} alt={pokemon.name} />#{pokemon.id}{" "}
+//       {capitalizeFirstLetter(pokemon.name)}
+//     </li>
+//   ))}
+// </ul>

@@ -37,3 +37,10 @@ export function wrapPromise<T>(promise: Promise<T>): { read: () => T } {
 export function delay(ms: number): Promise<undefined> {
   return new Promise<undefined>(resolve => setTimeout(() => resolve(), ms));
 }
+
+/**
+ * Runs `toUpperCase` on the first letter of the string.
+ */
+export function capitalizeFirstLetter(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
