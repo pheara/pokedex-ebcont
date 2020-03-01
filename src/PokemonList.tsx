@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 import {
   getFullPokemonsList,
   getFullPokemonsListResource,
-import { getFullPokemonsList } from "./PokeApiWrapper";
+  getPokemonDetailsResourceByName,
 } from "./PokeApiWrapper";
 import { PokemonMinimal } from "./model/Pokemon";
 import List from "@material-ui/core/List";
@@ -29,6 +29,10 @@ const PokemonList: FunctionComponent = () => {
           key={pokemon.id}
           component={RouterLink}
           to={"/" + pokemon.name}
+          onClick={(): void => {
+            // already start loading
+            getPokemonDetailsResourceByName(pokemon.name);
+          }}
         >
           <ListItemAvatar>
             <img src={pokemon.picture.href} alt={pokemon.name} />
