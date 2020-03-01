@@ -7,6 +7,7 @@ import {
   EvolutionTree,
   Type,
 } from "./model/Pokemon";
+import { wrapPromise, SuspenseResource } from "./utils";
 
 //////////////////////
 
@@ -151,6 +152,23 @@ export function getFullPokemonsList(): Promise<Array<PokemonMinimal>> {
   });
 }
 
+const fullPokemonListResource:
+  | undefined
+  | SuspenseResource<Array<PokemonMinimal>> = undefined;
+/**
+ * Returns the suspense-resource that is loading the full pokemon
+ * list.
+ */
+export function getFullPokemonsListResource(): SuspenseResource<
+  Array<PokemonMinimal>
+> {
+  if (fullPokemonListResource) {
+    return fullPokemonListResource;
+  } else {
+    return wrapPromise(getFullPokemonsList());
+  }
+}
+
 ////////////////////
 
 export function parseBaseStats(pokemonDetails: PokemonDetails): BaseStatBlock {
@@ -285,6 +303,29 @@ export async function getPokemonDetailsByName(
     order: details.order,
   };
   return pokemon;
+}
+
+const pokemonDetailsResources = new Map<
+  string,
+  SuspenseResource<PokemonDetailed>
+>();
+/**
+ * Returns the suspense-resource that will load the given pokemon's
+ * detail information or has already loaded it.
+ * @param name
+ */
+export function getPokemonDetailsResourceByName(
+  name: string
+): SuspenseResource<PokemonDetailed> {
+  if (pokemonDetailsResources.has(name)) {
+    return pokemonDetailsResources.get(name) as SuspenseResource<
+      PokemonDetailed
+    >;
+  } else {
+    const resource = wrapPromise(getPokemonDetailsByName(name));
+    pokemonDetailsResources.set(name, resource);
+    return resource;
+  }
 }
 
 ////////////////////

@@ -1,8 +1,12 @@
 import React, { FunctionComponent } from "react";
-import { wrapPromise, capitalizeFirstLetter } from "./utils";
+import { capitalizeFirstLetter } from "./utils";
 import { Link as RouterLink } from "react-router-dom";
 
+import {
+  getFullPokemonsList,
+  getFullPokemonsListResource,
 import { getFullPokemonsList } from "./PokeApiWrapper";
+} from "./PokeApiWrapper";
 import { PokemonMinimal } from "./model/Pokemon";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,7 +15,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 getFullPokemonsList().then(list => console.log("catch all of these: ", list));
 
-const resource = wrapPromise(getFullPokemonsList());
+const resource = getFullPokemonsListResource();
 
 const PokemonList: FunctionComponent = () => {
   const allPokemon: Array<PokemonMinimal> = resource.read();
