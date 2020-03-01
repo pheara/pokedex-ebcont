@@ -1,6 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { delay, wrapPromise, SuspenseResource } from "./utils";
 
+// import Pokedex from "pokeapi-js-wrapper";
+
+declare function require(path: string): object;
+// eslint-disable-next-line no-var-requires
+const Pokedex = require("pokeapi-js-wrapper");
+
+console.log("Pokedex: ", Pokedex);
+
 interface DummyPokemon {
   id: number;
   name: string;
