@@ -39,6 +39,7 @@ export declare interface PokemonSpecies {
   id: number;
   name: string;
   evolution_chain: { url: string };
+  names: Array<{ name: string; language: { name: string; url: string } }>;
 }
 export declare interface EvolutionChainLink {
   species: NamedResource; // url here is a `pokemon-species/:id` url
@@ -235,8 +236,9 @@ export async function getPokemonDetailsByName(
     }
   );
 
-  const [details, evolutionChain] = await Promise.all([
+  const [details, species, evolutionChain] = await Promise.all([
     detailsP,
+    speciesP,
     evolutionChainP,
   ]);
 
@@ -255,6 +257,12 @@ export async function getPokemonDetailsByName(
   );
   const baseStats: BaseStatBlock = parseBaseStats(details);
 
+  // names in different languages
+  const translatedNames: Map<string, string> = new Map();
+  species.names.forEach(n => {
+    translatedNames.set(n.language.name, n.name);
+  });
+
   const evolutionTree: EvolutionTree = parseEvolutionTree(evolutionChain.chain);
   const evolvesTo: Array<string> = parseEvolvesTo(
     details.name,
@@ -267,6 +275,7 @@ export async function getPokemonDetailsByName(
     moves,
     types,
     baseStats,
+    translatedNames,
     inEvolutionTree: evolutionTree,
     possibleEvolutions: evolvesTo,
     order: details.order,

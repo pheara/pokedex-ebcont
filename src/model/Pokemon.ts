@@ -18,6 +18,7 @@ export interface PokemonDetailed extends PokemonMinimal {
   possibleEvolutions: Array<string>;
   moves: Array<Move>;
   order: number;
+  translatedNames: Map<string, string>; // language -> name
   //   games: string; // would like to have this in minimal somehow, as the minimal info's used in the overview
 }
 
