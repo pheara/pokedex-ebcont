@@ -27,16 +27,8 @@ const ralts: PokemonDetailed = {
   ],
   moves: [
     {
-      name: "toxic",
-      url: new URL("https://pokeapi.co/api/v2/move/92/"),
-    },
-    {
       name: "confusion",
       url: new URL("https://pokeapi.co/api/v2/move/93/"),
-    },
-    {
-      name: "psychic",
-      url: new URL("https://pokeapi.co/api/v2/move/94/"),
     },
     {
       name: "hypnosis",
@@ -49,10 +41,6 @@ const ralts: PokemonDetailed = {
     {
       name: "dream-eater",
       url: new URL("https://pokeapi.co/api/v2/move/138/"),
-    },
-    {
-      name: "nightmare",
-      url: new URL("https://pokeapi.co/api/v2/move/171/"),
     },
   ],
   types: [
@@ -117,4 +105,15 @@ test("Details - abilities: Check if pokemon's abilities render to the details-co
   expect(ability2).toBeInTheDocument();
   const ability3 = getByText(/synchronize/i);
   expect(ability3).toBeInTheDocument();
+});
+test("Details - moves: Check if pokemon's moves render to the details-component.", () => {
+  const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
+  const move1 = getByText(/confusion/i);
+  expect(move1).toBeInTheDocument();
+  const move2 = getByText(/hypnosis/i);
+  expect(move2).toBeInTheDocument();
+  const move3 = getByText(/teleport/i);
+  expect(move3).toBeInTheDocument();
+  const move4 = getByText(/dream-eater/i);
+  expect(move4).toBeInTheDocument();
 });
