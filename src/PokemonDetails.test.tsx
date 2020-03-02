@@ -90,30 +90,24 @@ const ralts: PokemonDetailed = {
   possibleEvolutions: ["kirlia"],
   order: 356,
 };
-test("Details - types: Check if pokemon's types render to the details-component.", () => {
+function checkDetailsForTexts(regexps: Array<RegExp>): void {
   const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
-  const type1 = getByText(/fairy/i);
-  expect(type1).toBeInTheDocument();
-  const type2 = getByText(/psychic/i);
-  expect(type2).toBeInTheDocument();
+  regexps.forEach(regexp => {
+    const match = getByText(regexp);
+    expect(match).toBeInTheDocument();
+  });
+}
+test("Details - types: Check if pokemon's types render to the details-component.", () => {
+  checkDetailsForTexts([/fairy/i, /psychic/i]);
 });
 test("Details - abilities: Check if pokemon's abilities render to the details-component.", () => {
-  const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
-  const ability1 = getByText(/telepathy/i);
-  expect(ability1).toBeInTheDocument();
-  const ability2 = getByText(/trace/i);
-  expect(ability2).toBeInTheDocument();
-  const ability3 = getByText(/synchronize/i);
-  expect(ability3).toBeInTheDocument();
+  checkDetailsForTexts([/telepathy/i, /trace/i, /synchronize/i]);
 });
 test("Details - moves: Check if pokemon's moves render to the details-component.", () => {
-  const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
-  const move1 = getByText(/confusion/i);
-  expect(move1).toBeInTheDocument();
-  const move2 = getByText(/hypnosis/i);
-  expect(move2).toBeInTheDocument();
-  const move3 = getByText(/teleport/i);
-  expect(move3).toBeInTheDocument();
-  const move4 = getByText(/dream-eater/i);
-  expect(move4).toBeInTheDocument();
+  checkDetailsForTexts([
+    /confusion/i,
+    /hypnosis/i,
+    /teleport/i,
+    /dream-eater/i,
+  ]);
 });
