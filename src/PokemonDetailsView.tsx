@@ -2,6 +2,7 @@ import React, { Suspense, FunctionComponent, Fragment } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorBoundary";
 // import Button from "@material-ui/core/Button"
+import CircularProgress from "@material-ui/core/CircularProgress";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -53,7 +54,14 @@ const PokemonDetailsView: FunctionComponent = () => {
         </Toolbar>
       </AppBar>
       <ErrorBoundary fallback={<p>Failed to load pokemon!</p>}>
-        <Suspense fallback={<p>Loading pokemon ...</p>}>
+        <Suspense
+          fallback={
+            <Fragment>
+              <CircularProgress />
+              <p>Loading details for {titleStr}</p>
+            </Fragment>
+          }
+        >
           <PokemonDetails></PokemonDetails>
         </Suspense>
       </ErrorBoundary>

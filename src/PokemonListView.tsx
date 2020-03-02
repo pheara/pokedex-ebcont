@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import PokemonList from "./PokemonList";
 
 const useStyles = makeStyles((/*theme: Theme*/) =>
@@ -29,7 +30,14 @@ const PokemonListView: FunctionComponent = () => {
         </Toolbar>
       </AppBar>
       <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
-        <Suspense fallback={<p>Loading pokemon list...</p>}>
+        <Suspense
+          fallback={
+            <Fragment>
+              <CircularProgress />
+              <p>Loading pokemon list</p>
+            </Fragment>
+          }
+        >
           <PokemonList></PokemonList>
         </Suspense>
       </ErrorBoundary>
