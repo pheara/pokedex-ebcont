@@ -109,3 +109,12 @@ test("Details - types: Check if pokemon's types render to the details-component.
   const type2 = getByText(/psychic/i);
   expect(type2).toBeInTheDocument();
 });
+test("Details - abilities: Check if pokemon's abilities render to the details-component.", () => {
+  const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
+  const ability1 = getByText(/telepathy/i);
+  expect(ability1).toBeInTheDocument();
+  const ability2 = getByText(/trace/i);
+  expect(ability2).toBeInTheDocument();
+  const ability3 = getByText(/synchronize/i);
+  expect(ability3).toBeInTheDocument();
+});
