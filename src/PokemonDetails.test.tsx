@@ -98,21 +98,21 @@ function checkDetailsForTexts(regexps: Array<RegExp>): void {
   });
 }
 test(
-  "Details - types: Check if pokemon's types " +
+  "Details - types: Check if the pokemon's types " +
     "render to the details-component.",
   () => {
     checkDetailsForTexts([/fairy/i, /psychic/i]);
   }
 );
 test(
-  "Details - abilities: Check if pokemon's abilities " +
+  "Details - abilities: Check if the pokemon's abilities " +
     "render to the details-component.",
   () => {
     checkDetailsForTexts([/telepathy/i, /trace/i, /synchronize/i]);
   }
 );
 test(
-  "Details - moves: Check if pokemon's moves " +
+  "Details - moves: Check if the pokemon's moves " +
     "render to the details-component.",
   () => {
     checkDetailsForTexts([
