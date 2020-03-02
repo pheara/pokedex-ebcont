@@ -1,5 +1,5 @@
 import React, { Suspense, FunctionComponent, Fragment } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorBoundary";
 // import Button from "@material-ui/core/Button"
 import AppBar from "@material-ui/core/AppBar";
@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PokemonDetails from "./PokemonDetails";
+import { capitalizeFirstLetter } from "./utils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const PokemonDetailsView: FunctionComponent = () => {
   const classes = useStyles();
+  const { name } = useParams();
+  let titleStr = "Pokedex";
+  if (!!name) {
+    titleStr = capitalizeFirstLetter(name as string);
+  }
 
   return (
     <Fragment>
@@ -42,7 +48,7 @@ const PokemonDetailsView: FunctionComponent = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Pokedex
+            {titleStr}
           </Typography>
         </Toolbar>
       </AppBar>
