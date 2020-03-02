@@ -55,7 +55,7 @@ const ralts: PokemonDetailed = {
   ],
   baseStats: {
     hp: 28,
-    attack: 25,
+    attack: 26,
     defense: 25,
     specialAttack: 45,
     specialDefense: 35,
@@ -134,6 +134,13 @@ test(
   "Details - order: Check if the pokemon's order  " +
     "render to the details-component.",
   () => {
-    checkDetailsForTexts([/365/i]);
+    checkDetailsForTexts([/365/]);
+  }
+);
+test(
+  "Details - order: Check if the pokemon's base-stats  " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([/28/, /26/, /25/, /45/, /35/, /40/]);
   }
 );
