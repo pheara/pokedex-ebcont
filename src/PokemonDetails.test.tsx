@@ -97,17 +97,29 @@ function checkDetailsForTexts(regexps: Array<RegExp>): void {
     expect(match).toBeInTheDocument();
   });
 }
-test("Details - types: Check if pokemon's types render to the details-component.", () => {
-  checkDetailsForTexts([/fairy/i, /psychic/i]);
-});
-test("Details - abilities: Check if pokemon's abilities render to the details-component.", () => {
-  checkDetailsForTexts([/telepathy/i, /trace/i, /synchronize/i]);
-});
-test("Details - moves: Check if pokemon's moves render to the details-component.", () => {
-  checkDetailsForTexts([
-    /confusion/i,
-    /hypnosis/i,
-    /teleport/i,
-    /dream-eater/i,
-  ]);
-});
+test(
+  "Details - types: Check if pokemon's types " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([/fairy/i, /psychic/i]);
+  }
+);
+test(
+  "Details - abilities: Check if pokemon's abilities " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([/telepathy/i, /trace/i, /synchronize/i]);
+  }
+);
+test(
+  "Details - moves: Check if pokemon's moves " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([
+      /confusion/i,
+      /hypnosis/i,
+      /teleport/i,
+      /dream-eater/i,
+    ]);
+  }
+);
