@@ -123,3 +123,10 @@ test(
     ]);
   }
 );
+test(
+  "Details - evolution(s): Check if the pokemon's evolution(s) " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([/kirlia/i]);
+  }
+);
