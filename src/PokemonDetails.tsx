@@ -8,7 +8,6 @@ import { PokemonDetailed } from "./model/Pokemon";
 export const PokemonDetailsPure: FunctionComponent<{
   pokemon: PokemonDetailed;
 }> = ({ pokemon }) => {
-  console.log(pokemon);
   return (
     <React.Fragment>
       <h1>{capitalizeFirstLetter(name)}</h1>
