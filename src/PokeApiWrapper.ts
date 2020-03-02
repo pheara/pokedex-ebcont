@@ -236,7 +236,7 @@ export function parseEvolvesTo(
   }
 }
 
-export async function getPokemonDetailsByName(
+export function getPokemonDetailsByName(
   name: string
 ): Promise<PokemonDetailed> {
   const detailsP: Promise<PokemonDetails> = pokeApi.getPokemonByName(name);
@@ -258,51 +258,57 @@ export async function getPokemonDetailsByName(
     }
   );
 
-  const [details, species, evolutionChain] = await Promise.all([
-    detailsP,
-    speciesP,
-    evolutionChainP,
-  ]);
+  // would like to use async-await here; can't due to an build-setup prob, potentially
+  // related to the one expored here: <https://github.com/babel/babel/issues/8829>,
+  // as replacing async-await with its desugared, promise-based version fixed the issue.
+  // babel isn't a direct but an indirect dependency at the time of writing.
+  // TODO get async-await working
+  const pokemonP = Promise.all([detailsP, speciesP, evolutionChainP]).then(
+    ([details, species, evolutionChain]) => {
+      const minimalPokemon: PokemonMinimal = toPokemonMinimal(
+        details.id,
+        details.name
+      );
+      const abilities: Array<Ability> = details.abilities.map(a =>
+        parseNamedRessourceUrl(a.ability)
+      );
+      const moves: Array<Move> = details.moves.map(m =>
+        parseNamedRessourceUrl(m.move)
+      );
+      const types: Array<Type> = details.types.map(t =>
+        parseNamedRessourceUrl(t.type)
+      );
+      const baseStats: BaseStatBlock = parseBaseStats(details);
 
-  const minimalPokemon: PokemonMinimal = toPokemonMinimal(
-    details.id,
-    details.name
-  );
-  const abilities: Array<Ability> = details.abilities.map(a =>
-    parseNamedRessourceUrl(a.ability)
-  );
-  const moves: Array<Move> = details.moves.map(m =>
-    parseNamedRessourceUrl(m.move)
-  );
-  const types: Array<Type> = details.types.map(t =>
-    parseNamedRessourceUrl(t.type)
-  );
-  const baseStats: BaseStatBlock = parseBaseStats(details);
+      // names in different languages
+      const translatedNames: Map<string, string> = new Map();
+      species.names.forEach(n => {
+        translatedNames.set(n.language.name, n.name);
+      });
 
-  // names in different languages
-  const translatedNames: Map<string, string> = new Map();
-  species.names.forEach(n => {
-    translatedNames.set(n.language.name, n.name);
-  });
+      const evolutionTree: EvolutionTree = parseEvolutionTree(
+        evolutionChain.chain
+      );
+      const evolvesTo: Array<string> = parseEvolvesTo(
+        details.name,
+        evolutionChain.chain
+      );
 
-  const evolutionTree: EvolutionTree = parseEvolutionTree(evolutionChain.chain);
-  const evolvesTo: Array<string> = parseEvolvesTo(
-    details.name,
-    evolutionChain.chain
+      const pokemon: PokemonDetailed = {
+        ...minimalPokemon,
+        abilities,
+        moves,
+        types,
+        baseStats,
+        translatedNames,
+        inEvolutionTree: evolutionTree,
+        possibleEvolutions: evolvesTo,
+        order: details.order,
+      };
+      return pokemon;
+    }
   );
-
-  const pokemon: PokemonDetailed = {
-    ...minimalPokemon,
-    abilities,
-    moves,
-    types,
-    baseStats,
-    translatedNames,
-    inEvolutionTree: evolutionTree,
-    possibleEvolutions: evolvesTo,
-    order: details.order,
-  };
-  return pokemon;
+  return pokemonP;
 }
 
 const pokemonDetailsResources = new Map<
