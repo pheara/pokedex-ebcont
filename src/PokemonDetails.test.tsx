@@ -130,3 +130,10 @@ test(
     checkDetailsForTexts([/kirlia/i]);
   }
 );
+test(
+  "Details - order: Check if the pokemon's order  " +
+    "render to the details-component.",
+  () => {
+    checkDetailsForTexts([/365/i]);
+  }
+);
