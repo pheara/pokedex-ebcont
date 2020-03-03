@@ -28,7 +28,7 @@ export declare interface PokemonDetails {
   abilities: Array<{
     ability: NamedResource;
   }>;
-  moves: Array<{ move: NamedResource }>;
+  moves: Array<UnparsedMove>;
   stats: Array<{
     base_stat: number;
     effort: number;
@@ -48,6 +48,13 @@ export declare interface EvolutionChainLink {
 }
 export declare interface EvolutionChain {
   chain: EvolutionChainLink;
+}
+export interface UnparsedMove {
+  move: NamedResource;
+  version_group_details: Array<{
+    level_learned_at: number;
+    move_learn_method: NamedResource;
+  }>;
 }
 
 //TODO turn me into a `.d.ts`-file
@@ -236,6 +243,20 @@ export function parseEvolvesTo(
   }
 }
 
+function canBeLearnedFromLevelling(move: UnparsedMove) {
+  return (
+    move.version_group_details
+      .map(vgd => vgd.move_learn_method.name)
+      .filter(m => m === "level-up").length > 0
+  );
+}
+
+function minLevelLearned(move: UnparsedMove): number {
+  return Math.min(
+    ...move.version_group_details.map(vgd => vgd.level_learned_at)
+  );
+}
+
 export function getPokemonDetailsByName(
   name: string
 ): Promise<PokemonDetailed> {
@@ -272,9 +293,16 @@ export function getPokemonDetailsByName(
       const abilities: Array<Ability> = details.abilities.map(a =>
         parseNamedRessourceUrl(a.ability)
       );
-      const moves: Array<Move> = details.moves.map(m =>
-        parseNamedRessourceUrl(m.move)
-      );
+      const allMoves: Array<Move> = details.moves
+        .map(m => parseNamedRessourceUrl(m.move))
+        .sort();
+      const movesLearnedViaLevelUp = details.moves
+        .filter(canBeLearnedFromLevelling)
+        .sort((a, b) => minLevelLearned(a) - minLevelLearned(b))
+        .map(m => ({
+          ...parseNamedRessourceUrl(m.move),
+          minLevelLearned: minLevelLearned(m),
+        }));
       const types: Array<Type> = details.types.map(t =>
         parseNamedRessourceUrl(t.type)
       );
@@ -297,7 +325,8 @@ export function getPokemonDetailsByName(
       const pokemon: PokemonDetailed = {
         ...minimalPokemon,
         abilities,
-        moves,
+        moves: allMoves,
+        movesViaLevelUp: movesLearnedViaLevelUp,
         types,
         baseStats,
         translatedNames,

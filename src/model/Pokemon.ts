@@ -17,6 +17,7 @@ export interface PokemonDetailed extends PokemonMinimal {
   inEvolutionTree: EvolutionTree;
   possibleEvolutions: Array<string>;
   moves: Array<Move>;
+  movesViaLevelUp: Array<MoveViaLevelUp>;
   order: number;
   translatedNames: Map<string, string>; // language -> name
   //   games: string; // would like to have this in minimal somehow, as the minimal info's used in the overview
@@ -52,6 +53,9 @@ export interface Move {
   name: string;
   url: URL;
   // type: Type gained via move's detail page
+}
+export interface MoveViaLevelUp extends Move {
+  minLevelLearned: number;
 }
 
 export interface Type {
