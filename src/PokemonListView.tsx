@@ -5,17 +5,26 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import IconButton from "@material-ui/core/IconButton";
 import PokemonList from "./PokemonList";
+import pokeballIcon from "./icons/pokeball-filled.svg";
 
-const useStyles = makeStyles((/*theme: Theme*/) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
+    titleIcon: {
+      marginRight: theme.spacing(2),
+    },
     title: {
       flexGrow: 1,
     },
-  }));
+    pokeballIcon: {
+      height: 20,
+    },
+  })
+);
 
 const PokemonListView: FunctionComponent = () => {
   const classes = useStyles();
@@ -24,6 +33,18 @@ const PokemonListView: FunctionComponent = () => {
     <Fragment>
       <AppBar position="static">
         <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.titleIcon}
+            color="inherit"
+            aria-label="pokeball icon"
+          >
+            <img
+              src={pokeballIcon}
+              alt="pokeball icon"
+              className={classes.pokeballIcon}
+            />
+          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Pokedex
           </Typography>
