@@ -138,7 +138,7 @@ test(
   }
 );
 test(
-  "Details - order: Check if the pokemon's base-stats  " +
+  "Details - base stats: Check if the pokemon's base-stats  " +
     "render to the details-component.",
   () => {
     checkDetailsForTexts([/28/, /26/, /25/, /45/, /35/, /40/]);
