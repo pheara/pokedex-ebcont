@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { BaseStatBlock } from "../model/Pokemon";
 
 const useStyles = makeStyles((theme: Theme) => {
-  console.log("theme", theme);
   return createStyles({
     gridContainer: {
       flexGrow: 1,
