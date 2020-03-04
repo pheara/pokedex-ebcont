@@ -1,5 +1,5 @@
 import React, { Suspense, FunctionComponent, Fragment } from "react";
-import { ErrorBoundary } from "./ErrorBoundary";
+
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -7,7 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import PokemonList from "./PokemonList";
-import pokeballIcon from "./icons/pokeball-filled.svg";
+
+import pokeballIcon from "../icons/pokeball-filled.svg";
+
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

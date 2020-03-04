@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { FunctionComponent } from "react";
-import { BaseStatBlock } from "./model/Pokemon";
+
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-// import { text } from "material-ui/styles/colors";
+
+import { BaseStatBlock } from "../model/Pokemon";
 
 const useStyles = makeStyles((theme: Theme) => {
   console.log("theme", theme);

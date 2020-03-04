@@ -1,7 +1,6 @@
 import React, { Suspense, FunctionComponent, Fragment } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { ErrorBoundary } from "./ErrorBoundary";
-// import Button from "@material-ui/core/Button"
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -9,9 +8,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
+import { capitalizeFirstLetter } from "../utils";
+
+import { ErrorBoundary } from "./ErrorBoundary";
 import PokemonDetails from "./PokemonDetails";
-import { capitalizeFirstLetter } from "./utils";
-import { getPokemonDetailsResourceByName } from "./PokeApiWrapper";
+import { getPokemonDetailsResourceByName } from "../PokeApiWrapper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

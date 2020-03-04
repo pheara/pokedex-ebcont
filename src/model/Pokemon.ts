@@ -12,7 +12,6 @@ export interface PokemonDetailed extends PokemonMinimal {
    */
   abilities: Array<Ability>;
   types: Array<Type>; // technically it's Type | [Type, Type]
-  //orderNumber: string // == id
   baseStats: BaseStatBlock;
   inEvolutionTree: EvolutionTree;
   possibleEvolutions: Array<string>;

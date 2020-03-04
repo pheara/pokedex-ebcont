@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
-import { getPokemonDetailsResourceByName } from "./PokeApiWrapper";
-import { capitalizeFirstLetter } from "./utils";
+import { getPokemonDetailsResourceByName } from "../PokeApiWrapper";
+import { capitalizeFirstLetter } from "../utils";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";

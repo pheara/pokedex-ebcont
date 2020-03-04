@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { PokemonDetailsPure } from "./PokemonDetails";
-import { PokemonDetailed } from "./model/Pokemon";
+import { PokemonDetailed } from "../model/Pokemon";
 
 const ralts: PokemonDetailed = {
   id: 280,

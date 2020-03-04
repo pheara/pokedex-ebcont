@@ -1,17 +1,19 @@
 import React, { FunctionComponent } from "react";
-import { capitalizeFirstLetter } from "./utils";
 import { Link as RouterLink } from "react-router-dom";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import {
   getFullPokemonsList,
   getFullPokemonsListResource,
   getPokemonDetailsResourceByName,
-} from "./PokeApiWrapper";
-import { PokemonMinimal } from "./model/Pokemon";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
+} from "../PokeApiWrapper";
+
+import { capitalizeFirstLetter } from "../utils";
+import { PokemonMinimal } from "../model/Pokemon";
 
 getFullPokemonsList().then(list => console.log("catch all of these: ", list));
 
