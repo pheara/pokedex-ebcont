@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {} from "react-dom/experimental"; // import for experimental-mode type-defs
 import App from "./App";
+import "typeface-roboto";
 
 // old sync mode
 // ReactDOM.render(<App />, document.getElementById("react-root"));
