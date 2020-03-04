@@ -44,21 +44,15 @@ export interface EvolutionTree {
   evolvesTo: Array<EvolutionTree>; // empty array for leafs
 }
 
-export interface Ability {
+export interface NamedUrlResource {
   name: string;
   url: URL;
-}
-export interface Move {
-  // use type-decl instead of interface? does compiler check correct usage then?
-  name: string;
-  url: URL;
-  // type: Type gained via move's detail page
-}
-export interface MoveViaLevelUp extends Move {
-  minLevelLearned: number;
 }
 
-export interface Type {
-  name: string;
-  url: URL;
+export type Ability = NamedUrlResource;
+export type Move = NamedUrlResource;
+export type Type = NamedUrlResource;
+
+export interface MoveViaLevelUp extends Move {
+  minLevelLearned: number;
 }
