@@ -243,7 +243,7 @@ export function parseEvolvesTo(
   }
 }
 
-function canBeLearnedFromLevelling(move: UnparsedMove) {
+function canBeLearnedFromLevelling(move: UnparsedMove): boolean {
   return (
     move.version_group_details
       .map(vgd => vgd.move_learn_method.name)
