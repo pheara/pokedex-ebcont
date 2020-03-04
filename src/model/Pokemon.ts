@@ -7,7 +7,9 @@ export interface PokemonMinimal {
 
 export interface PokemonDetailed extends PokemonMinimal {
   /**
-   * Ability (Japanese: 特性 ability) is a game mechanic introduced in Generation III that provides a passive effect in battle or in the overworld. Individual Pokémon may have only one Ability at a time.
+   * Ability (Japanese: 特性 ability) is a game mechanic introduced in
+   * Generation III that provides a passive effect in battle or in the
+   *  overworld. Individual Pokémon may have only one Ability at a time.
    * source: <https://bulbapedia.bulbagarden.net/wiki/Ability>
    */
   abilities: Array<Ability>;
