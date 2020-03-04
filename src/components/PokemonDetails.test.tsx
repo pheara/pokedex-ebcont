@@ -25,6 +25,13 @@ const ralts: PokemonDetailed = {
       url: new URL("https://pokeapi.co/api/v2/ability/28/"),
     },
   ],
+  movesViaLevelUp: [
+    {
+      name: "hypnosis",
+      url: new URL("https://pokeapi.co/api/v2/move/95/"),
+      minLevelLearned: 10,
+    },
+  ],
   moves: [
     {
       name: "confusion",
