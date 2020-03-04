@@ -13,6 +13,7 @@ import { capitalizeFirstLetter } from "../utils";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 import PokemonDetails from "./PokemonDetails";
+import ElevationScroll from "./ElevationScroll";
 import { getPokemonDetailsResourceByName } from "../poke-api-wrapper/PokeApiWrapper";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,10 +64,9 @@ const FallbackAppBar: FunctionComponent = () => {
   return <ImgAppBar imgUrl={undefined} />;
 };
 
-const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = ({
+const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = props => {
   // eslint-disable-next-line react/prop-types
-  imgUrl,
-}) => {
+  const { imgUrl } = props;
   const classes = useStyles();
   const { name } = useParams();
 
@@ -80,23 +80,29 @@ const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = ({
     : { backgroundImage: `none` };
 
   return (
-    <AppBar position="static" className={classes.appBar} style={bgImgUrlStyle}>
-      <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="back"
-          component={RouterLink}
-          to={"/"}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-        <Typography variant="h6" component="h1" className={classes.title}>
-          {!name ? "" : capitalizeFirstLetter(name)}
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <ElevationScroll {...props}>
+      <AppBar
+        position="sticky"
+        className={classes.appBar}
+        style={bgImgUrlStyle}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="back"
+            component={RouterLink}
+            to={"/"}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="h6" component="h1" className={classes.title}>
+            {!name ? "" : capitalizeFirstLetter(name)}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </ElevationScroll>
   );
 };
 

@@ -6,7 +6,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
+
 import PokemonList from "./PokemonList";
+import ElevationScroll from "./ElevationScroll";
 
 import pokeballIcon from "../icons/pokeball-filled.svg";
 
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PokemonListView: FunctionComponent = () => {
+const PokemonListView: FunctionComponent = props => {
   const classes = useStyles();
   useEffect(() => {
     document.title = "Pokedex";
@@ -37,25 +39,27 @@ const PokemonListView: FunctionComponent = () => {
 
   return (
     <Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.titleIcon}
-            color="inherit"
-            aria-label="pokeball icon"
-          >
-            <img
-              src={pokeballIcon}
-              alt="pokeball icon"
-              className={classes.pokeballIcon}
-            />
-          </IconButton>
-          <Typography variant="h6" component="h1" className={classes.title}>
-            Pokedex
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <ElevationScroll {...props}>
+        <AppBar position="sticky">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.titleIcon}
+              color="inherit"
+              aria-label="pokeball icon"
+            >
+              <img
+                src={pokeballIcon}
+                alt="pokeball icon"
+                className={classes.pokeballIcon}
+              />
+            </IconButton>
+            <Typography variant="h6" component="h1" className={classes.title}>
+              Pokedex
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
       <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
         <Suspense
           fallback={
