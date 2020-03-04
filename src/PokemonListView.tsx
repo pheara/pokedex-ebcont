@@ -45,7 +45,7 @@ const PokemonListView: FunctionComponent = () => {
               className={classes.pokeballIcon}
             />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" component="h1" className={classes.title}>
             Pokedex
           </Typography>
         </Toolbar>

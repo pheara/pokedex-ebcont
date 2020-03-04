@@ -88,7 +88,7 @@ const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = ({
         >
           <ArrowBackIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" component="h1" className={classes.title}>
           {titleStr}
         </Typography>
       </Toolbar>
