@@ -90,7 +90,6 @@ export declare class PokeApi {
 declare function require(path: string): { Pokedex: any };
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PokedexImport = require("pokeapi-js-wrapper");
-console.log("Pokedex: ", PokedexImport);
 
 const pokeApi: PokeApi = new PokedexImport.Pokedex();
 
