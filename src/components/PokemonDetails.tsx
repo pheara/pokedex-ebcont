@@ -16,7 +16,8 @@ import {
   MoveViaLevelUp,
   Move,
   BaseStatBlock,
-} from "./model/Pokemon";
+} from "../model/Pokemon";
+
 import { StatBlock } from "./StatBlock";
 
 function renderStrDetailList(list: Array<string>): string {
