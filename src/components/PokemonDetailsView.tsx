@@ -13,7 +13,7 @@ import { capitalizeFirstLetter } from "../utils";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 import PokemonDetails from "./PokemonDetails";
-import { getPokemonDetailsResourceByName } from "../PokeApiWrapper";
+import { getPokemonDetailsResourceByName } from "../poke-api-wrapper/PokeApiWrapper";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

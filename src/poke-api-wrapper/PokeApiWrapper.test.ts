@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import {
-  EvolutionChainLink,
-  parseEvolutionTree,
-  parseEvolvesTo,
-} from "./PokeApiWrapper";
-import { EvolutionTree } from "./model/Pokemon";
+import { EvolutionChainLink } from "./PokeApiRawDataTypes";
+import { parseEvolutionTree, parseEvolvesTo } from "./ParsingUtils";
+import { EvolutionTree } from "../model/Pokemon";
 
 const venusaurEvolutionChainLink: EvolutionChainLink = {
   evolves_to: [],

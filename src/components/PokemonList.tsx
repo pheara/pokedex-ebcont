@@ -10,7 +10,7 @@ import {
   getFullPokemonsList,
   getFullPokemonsListResource,
   getPokemonDetailsResourceByName,
-} from "../PokeApiWrapper";
+} from "../poke-api-wrapper/PokeApiWrapper";
 
 import { capitalizeFirstLetter } from "../utils";
 import { PokemonMinimal } from "../model/Pokemon";
