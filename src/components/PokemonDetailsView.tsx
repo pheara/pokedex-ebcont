@@ -1,7 +1,6 @@
 import React, { Suspense, FunctionComponent, Fragment, useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 
-import CircularProgress from "@material-ui/core/CircularProgress";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";

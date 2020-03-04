@@ -5,9 +5,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
-import Box from "@material-ui/core/Box";
 
 import PokemonList from "./PokemonList";
 import ElevationScroll from "./ElevationScroll";
