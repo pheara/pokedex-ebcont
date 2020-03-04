@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, getAllByText } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { PokemonDetailsPure } from "./PokemonDetails";
 import { PokemonDetailed } from "../model/Pokemon";
@@ -97,11 +97,19 @@ const ralts: PokemonDetailed = {
   possibleEvolutions: ["kirlia"],
   order: 356,
 };
-function checkDetailsForTexts(regexps: Array<RegExp>): void {
+function checkDetailsForTexts(
+  regexps: Array<RegExp>,
+  allowMultiple = false
+): void {
   const { getByText } = render(<PokemonDetailsPure pokemon={ralts} />);
   regexps.forEach(regexp => {
-    const match = getByText(regexp);
-    expect(match).toBeInTheDocument();
+    if (allowMultiple) {
+      const matches = getAllByText(document.body, regexp);
+      matches.map(m => expect(m).toBeInTheDocument());
+    } else {
+      const match = getByText(regexp);
+      expect(match).toBeInTheDocument();
+    }
   });
 }
 test(
@@ -122,12 +130,10 @@ test(
   "Details - moves: Check if the pokemon's moves " +
     "render to the details-component.",
   () => {
-    checkDetailsForTexts([
-      /confusion/i,
-      /hypnosis/i,
-      /teleport/i,
-      /dream-eater/i,
-    ]);
+    checkDetailsForTexts(
+      [/confusion/i, /hypnosis/i, /teleport/i, /dream-eater/i],
+      true
+    );
   }
 );
 test(
