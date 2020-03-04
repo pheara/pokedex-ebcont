@@ -143,15 +143,13 @@ test(
     checkDetailsForTexts([/kirlia/i], true);
   }
 );
-/*
 test(
   "Details - order: Check if the pokemon's order  " +
     "render to the details-component.",
   () => {
-    checkDetailsForTexts([/365/], true);
+    checkDetailsForTexts([/356/], true);
   }
 );
-*/
 test(
   "Details - base stats: Check if the pokemon's base-stats  " +
     "render to the details-component.",
