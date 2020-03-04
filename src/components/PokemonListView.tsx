@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
@@ -72,17 +73,19 @@ const PokemonListView: FunctionComponent = props => {
         </AppBar>
       </ElevationScroll>
 
-      <ErrorBoundary
-        fallback={
-          <CenteredErrorMessage label="Failed to load list of pokemon!" />
-        }
-      >
-        <Suspense
-          fallback={<CenteredLabelledSpinner label="Loading pokemon list." />}
+      <Container maxWidth="sm">
+        <ErrorBoundary
+          fallback={
+            <CenteredErrorMessage label="Failed to load list of pokemon!" />
+          }
         >
-          <PokemonList></PokemonList>
-        </Suspense>
-      </ErrorBoundary>
+          <Suspense
+            fallback={<CenteredLabelledSpinner label="Loading pokemon list." />}
+          >
+            <PokemonList></PokemonList>
+          </Suspense>
+        </ErrorBoundary>
+      </Container>
     </Fragment>
   );
 };

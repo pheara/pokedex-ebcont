@@ -7,6 +7,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { capitalizeFirstLetter } from "../utils";
@@ -127,11 +128,13 @@ const PokemonDetailsView: FunctionComponent = () => {
           <PokemonImgAppBar />
         </Suspense>
       </ErrorBoundary>
-      <ErrorBoundary fallback={<CenteredErrorMessage label={errorMsg} />}>
-        <Suspense fallback={<CenteredLabelledSpinner label={loadingMsg} />}>
-          <PokemonDetails></PokemonDetails>
-        </Suspense>
-      </ErrorBoundary>
+      <Container maxWidth="sm">
+        <ErrorBoundary fallback={<CenteredErrorMessage label={errorMsg} />}>
+          <Suspense fallback={<CenteredLabelledSpinner label={loadingMsg} />}>
+            <PokemonDetails></PokemonDetails>
+          </Suspense>
+        </ErrorBoundary>
+      </Container>
     </Fragment>
   );
 };
