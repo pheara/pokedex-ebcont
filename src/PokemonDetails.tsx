@@ -3,17 +3,90 @@ import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { getPokemonDetailsResourceByName } from "./PokeApiWrapper";
 import { capitalizeFirstLetter } from "./utils";
-import { PokemonDetailed } from "./model/Pokemon";
+import {
+  PokemonDetailed,
+  NamedUrlResource,
+  MoveViaLevelUp,
+  Move,
+} from "./model/Pokemon";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+
+function renderStrDetailList(list: Array<string>): string {
+  if (list.length <= 0) {
+    return "None";
+  } else {
+    return list.map(str => capitalizeFirstLetter(str)).join(", ");
+  }
+}
+function renderResDetailList(list: Array<NamedUrlResource>): string {
+  return renderStrDetailList(list.map(res => res.name));
+}
+
+function renderMovesViaLevelling(moves: Array<MoveViaLevelUp>): string {
+  return renderStrDetailList(
+    moves.map(mv => `${mv.name} (${mv.minLevelLearned})`)
+  );
+}
+
+function renderPossibleMoves(moves: Array<Move>): string {
+  return renderStrDetailList(moves.map(mv => mv.name).sort());
+}
+
+const SimpleDetailsListItem: FunctionComponent<{
+  title: string;
+  body: string;
+}> = ({ title, body }) => {
+  return (
+    <ListItem>
+      <ListItemText
+        // primary={<Typography variant="overline">{title}</Typography>}
+        // secondary={<Typography variant="body1">{body}</Typography>}
+        primary={title}
+        secondary={body}
+        // primary={<Typography variant="h6">{title}</Typography>}
+        // secondary={<Typography variant="body2">{body}</Typography>}
+      ></ListItemText>
+    </ListItem>
+  );
+};
 
 export const PokemonDetailsPure: FunctionComponent<{
   pokemon: PokemonDetailed;
 }> = ({ pokemon }) => {
   return (
     <React.Fragment>
-      <h1>{capitalizeFirstLetter(name)}</h1>
-      {pokemon.types.map(t => (
-        <p key={t.name}>{t.name}</p>
-      ))}
+      <List>
+        <SimpleDetailsListItem title="Order" body={"#" + pokemon.order} />
+        <Divider />
+        <SimpleDetailsListItem
+          title="Types"
+          body={renderResDetailList(pokemon.types)}
+        />
+        <Divider />
+        <SimpleDetailsListItem
+          title="Evolutions"
+          body={renderStrDetailList(pokemon.possibleEvolutions)}
+        />
+        <Divider />
+        <SimpleDetailsListItem
+          title="Abilities"
+          body={renderResDetailList(pokemon.abilities)}
+        />
+        <Divider />
+        <SimpleDetailsListItem
+          title="Moves learned by levelling"
+          body={renderMovesViaLevelling(pokemon.movesViaLevelUp)}
+        />
+        <Divider />
+        <SimpleDetailsListItem
+          title="All possible moves"
+          body={renderPossibleMoves(pokemon.moves)}
+        />
+      </List>
     </React.Fragment>
   );
 };
