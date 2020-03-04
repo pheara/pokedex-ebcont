@@ -1,4 +1,4 @@
-import React, { Suspense, FunctionComponent, Fragment } from "react";
+import React, { Suspense, FunctionComponent, Fragment, useEffect } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const PokemonListView: FunctionComponent = () => {
   const classes = useStyles();
+  useEffect(() => {
+    document.title = "Pokedex";
+  });
 
   return (
     <Fragment>

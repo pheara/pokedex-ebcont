@@ -1,4 +1,4 @@
-import React, { Suspense, FunctionComponent, Fragment } from "react";
+import React, { Suspense, FunctionComponent, Fragment, useEffect } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -69,10 +69,12 @@ const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = ({
 }) => {
   const classes = useStyles();
   const { name } = useParams();
-  let titleStr = "Pokedex";
-  if (!!name) {
-    titleStr = capitalizeFirstLetter(name as string);
-  }
+
+  useEffect(() => {
+    document.title =
+      "Pokedex" + (!name ? "" : ` - ${capitalizeFirstLetter(name)}`);
+  });
+
   const bgImgUrlStyle = imgUrl
     ? { backgroundImage: `url(${imgUrl})` }
     : { backgroundImage: `none` };
@@ -91,7 +93,7 @@ const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = ({
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h6" component="h1" className={classes.title}>
-          {titleStr}
+          {!name ? "" : capitalizeFirstLetter(name)}
         </Typography>
       </Toolbar>
     </AppBar>
