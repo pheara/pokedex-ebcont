@@ -14,6 +14,9 @@ import { capitalizeFirstLetter } from "../utils";
 import { ErrorBoundary } from "./ErrorBoundary";
 import PokemonDetails from "./PokemonDetails";
 import ElevationScroll from "./ElevationScroll";
+import CenteredLabelledSpinner from "./CenteredLabelledSpinner";
+import CenteredErrorMessage from "./CenteredErrorMessage";
+
 import { getPokemonDetailsResourceByName } from "../poke-api-wrapper/PokeApiWrapper";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -109,9 +112,12 @@ const ImgAppBar: FunctionComponent<{ imgUrl: string | undefined }> = props => {
 const PokemonDetailsView: FunctionComponent = () => {
   const { name } = useParams();
 
-  let titleStr = "Pokedex";
+  let loadingMsg = "Loading details";
+  let errorMsg = "Failed to load pokemon!";
   if (!!name) {
-    titleStr = capitalizeFirstLetter(name as string);
+    const capitalizedName = capitalizeFirstLetter(name as string);
+    loadingMsg = loadingMsg + " for " + capitalizedName + ".";
+    errorMsg = `Failed to load details for ${capitalizedName}!`;
   }
 
   return (
@@ -121,15 +127,8 @@ const PokemonDetailsView: FunctionComponent = () => {
           <PokemonImgAppBar />
         </Suspense>
       </ErrorBoundary>
-      <ErrorBoundary fallback={<p>Failed to load pokemon!</p>}>
-        <Suspense
-          fallback={
-            <Fragment>
-              <CircularProgress />
-              <p>Loading details for {titleStr}</p>
-            </Fragment>
-          }
-        >
+      <ErrorBoundary fallback={<CenteredErrorMessage label={errorMsg} />}>
+        <Suspense fallback={<CenteredLabelledSpinner label={loadingMsg} />}>
           <PokemonDetails></PokemonDetails>
         </Suspense>
       </ErrorBoundary>

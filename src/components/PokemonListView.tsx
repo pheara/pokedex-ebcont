@@ -6,9 +6,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
 
 import PokemonList from "./PokemonList";
 import ElevationScroll from "./ElevationScroll";
+import CenteredLabelledSpinner from "./CenteredLabelledSpinner";
+import CenteredErrorMessage from "./CenteredErrorMessage";
 
 import pokeballIcon from "../icons/pokeball-filled.svg";
 
@@ -27,6 +30,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     pokeballIcon: {
       height: 20,
+    },
+    centeredErrorMessage: {
+      display: "block",
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      textAlign: "center",
     },
   })
 );
@@ -60,14 +71,14 @@ const PokemonListView: FunctionComponent = props => {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <ErrorBoundary fallback={<p>Failed to load list of pokemon!</p>}>
+
+      <ErrorBoundary
+        fallback={
+          <CenteredErrorMessage label="Failed to load list of pokemon!" />
+        }
+      >
         <Suspense
-          fallback={
-            <Fragment>
-              <CircularProgress />
-              <p>Loading pokemon list</p>
-            </Fragment>
-          }
+          fallback={<CenteredLabelledSpinner label="Loading pokemon list." />}
         >
           <PokemonList></PokemonList>
         </Suspense>
