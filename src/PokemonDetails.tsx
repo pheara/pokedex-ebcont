@@ -48,9 +48,12 @@ const SimpleDetailsListItem: FunctionComponent<{
     <ListItem>
       <section>
         <ListItemText
-          // primary={<Typography variant="overline">{title}</Typography>}
-          // secondary={<Typography variant="body1">{body}</Typography>}
-          // primary={title}
+          //   primary={
+          //     <Typography variant="overline" component="h2">
+          //       {title}
+          //     </Typography>
+          //   }
+          //   secondary={<Typography variant="body1">{body}</Typography>}
           primary={
             <Typography variant="body1" component="h2">
               {title}
@@ -74,6 +77,7 @@ const BaseStatsItem: FunctionComponent<{
         disableTypography
         primary={
           <Typography variant="body1" component="h2">
+            {/* <Typography variant="overline" component="h2"> */}
             BaseStats
           </Typography>
         }
