@@ -149,6 +149,10 @@ export function getFullPokemonsList(): Promise<Array<PokemonMinimal>> {
       // parse datapoints and pass on those parsing successfully
       const allPokemon: Array<PokemonMinimal> = resp.results
         .map(parsePokemonListEntry)
+        // IDs >= 10k are reserved for pokemon style-variants, that
+        // won't have proper detail entries in `/v2/pokemon/:id`.
+        // also, for many of them no image exists.
+        .filter(p => p.id < 10000)
         // filter out the parsing failures
         .filter(p => !!p) as Array<PokemonMinimal>;
       return allPokemon;
