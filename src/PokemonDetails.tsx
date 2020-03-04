@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getPokemonDetailsResourceByName } from "./PokeApiWrapper";
 import { capitalizeFirstLetter } from "./utils";
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,8 +20,6 @@ import {
   BaseStatBlock,
 } from "./model/Pokemon";
 import { StatBlock } from "./StatBlock";
-
-import { findByLabelText } from "@testing-library/react";
 
 function renderStrDetailList(list: Array<string>): string {
   if (list.length <= 0) {
@@ -62,7 +60,7 @@ const SimpleDetailsListItem: FunctionComponent<{
   );
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((/*theme: Theme*/) =>
   createStyles({
     baseStatsItem: {
       display: "flex",
@@ -70,8 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "stretch",
       alignItems: "stretch",
     },
-  })
-);
+  }));
 
 const BaseStatsItem: FunctionComponent<{
   baseStats: BaseStatBlock;
@@ -81,18 +78,6 @@ const BaseStatsItem: FunctionComponent<{
     <ListItem className={classes.baseStatsItem}>
       <Typography variant="body1">Base Stats</Typography>
       <StatBlock baseStats={baseStats} />
-    </ListItem>
-  );
-};
-const BaseStatsItem2: FunctionComponent<{
-  baseStats: BaseStatBlock;
-}> = ({ baseStats }) => {
-  return (
-    <ListItem>
-      <ListItemText
-        primary="Base Stats"
-        secondary={<StatBlock baseStats={baseStats} />}
-      />
     </ListItem>
   );
 };
