@@ -48,14 +48,21 @@ const SimpleDetailsListItem: FunctionComponent<{
 }> = ({ title, body }) => {
   return (
     <ListItem>
-      <ListItemText
-        // primary={<Typography variant="overline">{title}</Typography>}
-        // secondary={<Typography variant="body1">{body}</Typography>}
-        primary={title}
-        secondary={body}
-        // primary={<Typography variant="h6">{title}</Typography>}
-        // secondary={<Typography variant="body2">{body}</Typography>}
-      ></ListItemText>
+      <section>
+        <ListItemText
+          // primary={<Typography variant="overline">{title}</Typography>}
+          // secondary={<Typography variant="body1">{body}</Typography>}
+          // primary={title}
+          primary={
+            <Typography variant="body1" component="h2">
+              {title}
+            </Typography>
+          }
+          secondary={body}
+          // primary={<Typography variant="h6">{title}</Typography>}
+          // secondary={<Typography variant="body2">{body}</Typography>}
+        ></ListItemText>
+      </section>
     </ListItem>
   );
 };
@@ -76,7 +83,9 @@ const BaseStatsItem: FunctionComponent<{
   const classes = useStyles();
   return (
     <ListItem className={classes.baseStatsItem}>
-      <Typography variant="body1">Base Stats</Typography>
+      <Typography variant="body1" component="h2">
+        Base Stats
+      </Typography>
       <StatBlock baseStats={baseStats} />
     </ListItem>
   );
