@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import { getPokemonDetailsResourceByName } from "./PokeApiWrapper";
 import { capitalizeFirstLetter } from "./utils";
 
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -67,26 +65,20 @@ const SimpleDetailsListItem: FunctionComponent<{
   );
 };
 
-const useStyles = makeStyles((/*theme: Theme*/) =>
-  createStyles({
-    baseStatsItem: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "stretch",
-      alignItems: "stretch",
-    },
-  }));
-
 const BaseStatsItem: FunctionComponent<{
   baseStats: BaseStatBlock;
 }> = ({ baseStats }) => {
-  const classes = useStyles();
   return (
-    <ListItem className={classes.baseStatsItem}>
-      <Typography variant="body1" component="h2">
-        Base Stats
-      </Typography>
-      <StatBlock baseStats={baseStats} />
+    <ListItem>
+      <ListItemText
+        disableTypography
+        primary={
+          <Typography variant="body1" component="h2">
+            BaseStats
+          </Typography>
+        }
+        secondary={<StatBlock baseStats={baseStats} />}
+      />
     </ListItem>
   );
 };
