@@ -8,12 +8,14 @@ import {
   NamedUrlResource,
   MoveViaLevelUp,
   Move,
+  BaseStatBlock,
 } from "./model/Pokemon";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Divider";
 
 function renderStrDetailList(list: Array<string>): string {
   if (list.length <= 0) {
@@ -54,12 +56,41 @@ const SimpleDetailsListItem: FunctionComponent<{
   );
 };
 
+// const StatBlock: FunctionComponent<{
+//     stats: BaseStatBlock;
+// }> => ({ stats }) => {
+//     return (<p>foo</p>);
+// }
+
 export const PokemonDetailsPure: FunctionComponent<{
   pokemon: PokemonDetailed;
 }> = ({ pokemon }) => {
   return (
     <React.Fragment>
       <List>
+        <ListItem>
+          <Grid container="true" spacing={3}>
+            <Grid item="true" xs={4}>
+              <div>{pokemon.baseStats.hp}</div>
+            </Grid>
+            <Grid item={1} xs={4}>
+              {pokemon.baseStats.attack}
+            </Grid>
+            <Grid item={1} xs={4}>
+              {pokemon.baseStats.defense}
+            </Grid>
+            <Grid item xs={4}>
+              {pokemon.baseStats.specialAttack}
+            </Grid>
+            <Grid item xs={4}>
+              {pokemon.baseStats.specialDefense}
+            </Grid>
+            <Grid item xs={4}>
+              {pokemon.baseStats.speed}
+            </Grid>
+          </Grid>
+        </ListItem>
+
         <SimpleDetailsListItem title="Order" body={"#" + pokemon.order} />
         <Divider />
         <SimpleDetailsListItem
