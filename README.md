@@ -12,6 +12,8 @@ Run unit tests: `npm run test` or `./node_modules/.bin/yarn test`
 
 Build for production: `npm run build` or `./node_modules/.bin/yarn build`
 
+The build also generates a treemap of the dependencies impact on bundle size in `dist/report.html`
+
 Open issues can be seen and submitted at <https://github.com/pheara/pokedex-ebcont/issues>.
 
 ![Screenshot of the pokemon-list view](https://i.imgur.com/3NmsqXJ.png)
