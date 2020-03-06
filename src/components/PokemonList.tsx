@@ -63,32 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const Row: FunctionComponent<ListChildComponentProps> = props => {
-  const classes = useStyles();
-  // function renderRow(props: ListChildComponentProps) {
-  const { index, style } = props;
-
-  //   return (
-  //     <ListItem button style={style} key={index}>
-  //       <ListItemText primary={`Item ${index + 1}`} />
-  //     </ListItem>
-  //   );
-  return (
-    <div style={style} className={classes.listItem}>
-      Row {index}
-    </div>
-  );
-};
-
-function renderRow(props: ListChildComponentProps) {
-  const { index, style } = props;
-
-  return (
-    <ListItem button style={style} key={index}>
-      <ListItemText primary={`Item ${index + 1}`} />
-    </ListItem>
-  );
-}
 function renderRow2(props: ListChildComponentProps) {
   const { index, style } = props;
   const classes = useStyles();
@@ -96,6 +70,19 @@ function renderRow2(props: ListChildComponentProps) {
     <div className={classes.listItem} style={style}>
       Row {index}
     </div>
+  );
+}
+
+function renderRow(props: ListChildComponentProps) {
+  const { index, style, data } = props;
+  const pokemon: PokemonMinimal = data.allPokemon[index];
+
+  return (
+    <ListItem button style={style} key={index}>
+      <ListItemText
+        primary={`Item ${index + 1} - ${pokemon && pokemon.name}`}
+      />
+    </ListItem>
   );
 }
 
@@ -113,8 +100,9 @@ const PokemonList: FunctionComponent = () => {
           width={width}
           itemSize={46}
           itemCount={200}
+          itemData={{ allPokemon: allPokemon }}
         >
-          {renderRow2}
+          {renderRow}
         </FixedSizeList>
       )}
     </AutoSizer>
