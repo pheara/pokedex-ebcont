@@ -54,9 +54,6 @@ const PokemonList: FunctionComponent = () => {
   const allPokemon: Array<PokemonMinimal> = resource.read();
 
   return (
-    // <FixedSizeList height={400} width={300} itemSize={46} itemCount={200}>
-    //   {renderRow}
-    // </FixedSizeList>
     <AutoSizer>
       {({ height, width }): ReactNode => (
         <FixedSizeList
