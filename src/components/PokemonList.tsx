@@ -99,7 +99,7 @@ const PokemonList: FunctionComponent = () => {
           height={height}
           width={width}
           itemSize={46}
-          itemCount={200}
+          itemCount={allPokemon.length}
           itemData={{ allPokemon: allPokemon }}
         >
           {renderRow}
