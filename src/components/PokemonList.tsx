@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import ListItem from "@material-ui/core/ListItem";
@@ -22,7 +22,7 @@ getFullPokemonsList().then(list => console.log("catch all of these: ", list));
 
 const resource = getFullPokemonsListResource();
 
-function renderRow(props: ListChildComponentProps) {
+function renderRow(props: ListChildComponentProps): JSX.Element {
   const { index, style, data } = props;
   const pokemon: PokemonMinimal = data.allPokemon[index];
 
@@ -58,7 +58,7 @@ const PokemonList: FunctionComponent = () => {
     //   {renderRow}
     // </FixedSizeList>
     <AutoSizer>
-      {({ height, width }) => (
+      {({ height, width }): ReactNode => (
         <FixedSizeList
           height={height}
           width={width}
