@@ -78,10 +78,18 @@ function renderRow(props: ListChildComponentProps) {
   const pokemon: PokemonMinimal = data.allPokemon[index];
 
   return (
-    <ListItem button divider style={style} key={index}>
-      {/* <ListItemText
-        primary={`Item ${index + 1} - ${pokemon && pokemon.name}`}
-      /> */}
+    <ListItem
+      button
+      divider
+      key={index}
+      style={style}
+      component={RouterLink}
+      to={"/" + pokemon.name}
+      onClick={(): void => {
+        // already start loading
+        getPokemonDetailsResourceByName(pokemon.name);
+      }}
+    >
       <ListItemAvatar>
         <img src={pokemon.picture.href} alt={pokemon.name} />
       </ListItemAvatar>
