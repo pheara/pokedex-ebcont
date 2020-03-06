@@ -16,8 +16,9 @@ import pokeballIcon from "../icons/pokeball-filled.svg";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+const useStyles = makeStyles((theme: Theme) => {
+  console.log(theme);
+  return createStyles({
     root: {
       flexGrow: 1,
     },
@@ -38,8 +39,15 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: "translate(-50%, -50%)",
       textAlign: "center",
     },
-  })
-);
+    listContainer: {
+      // TODO this is a very frail way of saying
+      // "fill the remaining height", as the appbar
+      // might vary in size
+      height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
+      width: "100%",
+    },
+  });
+});
 
 const PokemonListView: FunctionComponent = props => {
   const classes = useStyles();
@@ -71,7 +79,8 @@ const PokemonListView: FunctionComponent = props => {
         </AppBar>
       </ElevationScroll>
 
-      <Container maxWidth="sm">
+      {/* <Container maxWidth="sm" style={{ height: "100%", width: "100%" }}> */}
+      <Container maxWidth="sm" className={classes.listContainer}>
         <ErrorBoundary
           fallback={
             <CenteredErrorMessage label="Failed to load list of pokemon!" />

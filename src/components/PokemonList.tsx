@@ -89,14 +89,35 @@ function renderRow(props: ListChildComponentProps) {
     </ListItem>
   );
 }
+function renderRow2(props: ListChildComponentProps) {
+  const { index, style } = props;
+  const classes = useStyles();
+  return (
+    <div className={classes.listItem} style={style}>
+      Row {index}
+    </div>
+  );
+}
 
 const PokemonList: FunctionComponent = () => {
   const allPokemon: Array<PokemonMinimal> = resource.read();
 
   return (
-    <FixedSizeList height={400} width={300} itemSize={46} itemCount={200}>
-      {renderRow}
-    </FixedSizeList>
+    // <FixedSizeList height={400} width={300} itemSize={46} itemCount={200}>
+    //   {renderRow}
+    // </FixedSizeList>
+    <AutoSizer>
+      {({ height, width }) => (
+        <FixedSizeList
+          height={height}
+          width={width}
+          itemSize={46}
+          itemCount={200}
+        >
+          {renderRow2}
+        </FixedSizeList>
+      )}
+    </AutoSizer>
 
     //</AutoSizer>
     // <AutoSizer>
