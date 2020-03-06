@@ -78,9 +78,16 @@ function renderRow(props: ListChildComponentProps) {
   const pokemon: PokemonMinimal = data.allPokemon[index];
 
   return (
-    <ListItem button style={style} key={index}>
-      <ListItemText
+    <ListItem button divider style={style} key={index}>
+      {/* <ListItemText
         primary={`Item ${index + 1} - ${pokemon && pokemon.name}`}
+      /> */}
+      <ListItemAvatar>
+        <img src={pokemon.picture.href} alt={pokemon.name} />
+      </ListItemAvatar>
+      <ListItemText
+        primary={capitalizeFirstLetter(pokemon.name)}
+        secondary={"#" + pokemon.id}
       />
     </ListItem>
   );
@@ -98,7 +105,7 @@ const PokemonList: FunctionComponent = () => {
         <FixedSizeList
           height={height}
           width={width}
-          itemSize={46}
+          itemSize={118}
           itemCount={allPokemon.length}
           itemData={{ allPokemon: allPokemon }}
         >
