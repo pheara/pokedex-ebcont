@@ -58,7 +58,7 @@
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "@types/react-window": "^1.8.1",
     "pokeapi-js-wrapper": "^1.1.2",
-    "react": "^0.0.0-experimental-355970aa4",
+    "react": "^0.14.0",
     "react-dom": "^0.0.0-experimental-355970aa4",
     "react-router-dom": "^5.1.2",
     "react-virtualized-auto-sizer": "^1.0.2",
