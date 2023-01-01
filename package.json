@@ -40,7 +40,7 @@
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
-    "parcel": "^1.12.4",
+    "parcel": "^2.8.2",
     "parcel-plugin-bundle-visualiser": "^1.2.0",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
